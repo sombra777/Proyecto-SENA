@@ -1,25 +1,37 @@
-<<<<<<< HEAD
-
-=======
 <?php
-    session_start();
+    $formato = array('.pdf');
+    if(isset($_POST['boton'])){
+        //PARA CAPTURAR EL NOMBRE DEL ARCHIVO
+        $nombreArchivo = $_FILES['Url-archiv']['name'];
+        $nombreTmpArchivo = $_FILES['Url-archiv']['tmp_name'];
+        $ext = substr($nombreArchivo,strrpos($nombreArchivo, '.'));
+        if(in_array($ext, $formato)){
+            //para subir un archivo a una carpeta
+            if(move_uploaded_file($nombreTmpArchivo, "archivo/$nombreArchivo")){
+                 echo "Archivo subido exitosamente";
+            }
 
-    require 'database.php';
-
-    if (isset($_SESSION['user_id'])) {
-        $records = $conn->prepare('SELECT id, email, password FROM users WHERE id = :id');
-        $records->bindParam(':id', $_SESSION['user_id']);
-        $records->execute();
-        $results = $records->fetch(PDO::FETCH_ASSOC);
-
-        $user = null;
-
-        if (count($results) > 0) {
-        $user = $results;
+        }else{
+            echo"No señor, Archivo no permitido";
         }
     }
+    // session_start();
+
+    // require 'database.php';
+
+    // if (isset($_SESSION['user_id'])) {
+    //     $records = $conn->prepare('SELECT id, email, password FROM users WHERE id = :id');
+    //     $records->bindParam(':id', $_SESSION['user_id']);
+    //     $records->execute();
+    //     $results = $records->fetch(PDO::FETCH_ASSOC);
+
+    //     $user = null;
+
+    //     if (count($results) > 0) {
+    //     $user = $results;
+    //     }
+    // }
 ?>
->>>>>>> e1736ce649908dcf39cbaac4d9c66d6fce9a6863
 
 <!DOCTYPE html>
 <html lang="en">
@@ -104,7 +116,7 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <!-- Topbar Search -->
+                    <!-- FORMULARIO DE SUBIR LOS ARCHIVOS-->
                     <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method = "POST" enctype = "multipart/form-data">
                         <div class="input-group">
                             <div class="input-group-append">
