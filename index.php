@@ -2,8 +2,8 @@
     $formato = array('.pdf');
     if(isset($_POST['boton'])){
         //PARA CAPTURAR EL NOMBRE DEL ARCHIVO
-        $nombreArchivo = $_FILES['Url-archiv']['name'];
-        $nombreTmpArchivo = $_FILES['Url-archiv']['tmp_name'];
+        $nombreArchivo = $_FILES['Url-archivo']['name'];
+        $nombreTmpArchivo = $_FILES['Url-archivo']['tmp_name'];
         $ext = substr($nombreArchivo,strrpos($nombreArchivo, '.'));
         if(in_array($ext, $formato)){
             //para subir un archivo a una carpeta
