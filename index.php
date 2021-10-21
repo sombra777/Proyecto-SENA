@@ -1,223 +1,168 @@
-
 <?php
     session_start();
 
     require 'database.php';
 
-    if (!empy($_POST['email']) && !empy($_POST['password'])) {
+    if (isset($_SESSION['user_id'])) {
         $records = $conn->prepare('SELECT id, email, password FROM users WHERE id = :id');
-        $records->bindParam(':email', $_POST['email']);
+        $records->bindParam(':id', $_SESSION['user_id']);
         $records->execute();
         $results = $records->fetch(PDO::FETCH_ASSOC);
 
-        $message = '';
+        $user = null;
 
-        if (count($results) > 0 && password_verify($_POST['password'])) {
-        $_SESSION ['user_id'] = $results ['id'];
-        header('location:  /php-login');
-        }else{
-            $message('no se pudo ingresar');
+        if (count($results) > 0) {
+        $user = $results;
         }
     }
-    
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
+
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Administrador</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
 </head>
-<body>
-    
 
-
-<!--  -->
-<!-- <form action="Leer_archivo.php" method="POST">
-    <h3>Ingrese La direccion del archivo</h3>
-    <p>Url: <input type="text" name="Url-archivo" ></p>
-    
-    <p><input type="submit" value="Enviar"></p>
-</form> -->
-
-<!-- <form action="MostrarCarpeta.php" method="post">
-    <h3>Ingrese La direccion del repositorio</h3>
-    <p>Url - Carpeta: <input type="text" name="Url-carpeta"></p>
-    <p><input type="submit" value="Mostrar"></p>
-    
-</form> -->
-
-<h2>Selecciona una imagen:</h2>
-	<form action="Procesar.php" enctype="multipart/form-data" method="POST">
-		<input type="file" name="imagen" required>
-		<br>
-		<br>
-		<button type="submit">Enviar</button>
-	</form>
-
-    
-
-</body>
-</html>
-
-
-
-
-
-<<<<<<< HEAD
-
-
-
-
-
-
-
-
-
-<!-- # Incluir autoload
-
-
-
-
-// switch (stristr($texto,'')) {
-//     case 'factura' || 'Factura':
-//         echo " <br>Es una factura </br> ";
-//         break;
-//     case 'cuenta de cobro' || 'Cuenta de cobro':
-//         echo " <br>Es una Cuenta de cobro </br> ";
-//         break;
-//     case 'PAGARÉ' || 'pagaré' || 'Pagaré':
-//         echo "<br>Es un Pagaré </br> ";
-//         break;
-// }
-
-// if(stristr($texto, 'factura')) {
-//     echo " <br>Es una factura </br> ";
-// }
-// if(stristr($texto, 'cuenta de cobro' || 'Cuenta de cobro')) {
-    
-//     echo " <br>Es una Cuenta de cobro </br> ";
-
-    
-// }
-// if(stristr($texto, 'PAGARÉ' || 'pagaré' || 'Pagaré')) {
-    
-//     echo " <br>Es un Pagaré </br> ";
-    
-    
-// }
-
-
-
-
-// echo "<pre>";
-// echo $texto;
-// echo "</pre>";
-    // echo "<br> </br>";
-    // include('manipular.php');
-
-    
-    // function showFiles($path){
-
-    //     $dir = opendir($path);
-    //     if(eregi(".*\.pdf", $path.$current))
-    //     $files = array();
-    //     while ($current = readdir($dir)){
-    //         if( $current != "." && $current != "..") {
-    //             if(is_dir($path.$current)) {
-    //                 showFiles($path.$current.'/');
-    //             }
-    //             else {
-    //                 $files[] = $current;
-    //             }
-    //         }
-    //     }
-    //     echo '<h2>'.$path.'</h2>';
-    //     echo '<ul>';
-    //     for($i=0; $i<count( $files ); $i++){
-    //         echo '<li>'.$files[$i]."</li>";
-    //     }
-    //     echo '</ul>';
-    // }
-
-=======
-<body class="bg-gradient-primary">
-    <?php if(!empty($message)): ?>
-        <p> <?= $message ?></p>
+<body id="page-top">
+        <?php if(!empty($user)): ?>
+        <br> Welcome. <?= $user['email']; ?>
+        <br>You are Successfully Logged In
+        <a href="main.php">
+            Logout
+        </a>
     <?php endif; ?>
-        <div class="container">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
 
-        <!-- Outer Row -->
-            <div class="row justify-content-center">
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-                <div class="col-xl-8 col-lg-12 col-md-9">
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-archive"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">Gestor de archivos</div>
+            </a>
 
-                    <div class="card o-hidden border-0 shadow-lg my-5">
-                    <!-- Nested Row within Card Body -->
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
 
-                        <div class="row-vw-100">
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html">
+                    <span><i class="fas fa-folder"></i>Carpeta</span></a>
+            </li>
 
-                            <div class="col-lg-10-vw-100">
-                                <div class="p-5">
-                                    <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Bienvenido</h1>
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
 
-                                        <img src="img\login.png" class="m-4" width="250px" alt="">
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                
+            </div>
 
-                                    
+            <!-- Sidebar Message -->
+            
 
-                                    </div>
-                                <form action="login.php" method="POST">
-                                    <input name="email" type="text" placeholder="Enter your email">
-                                    <input name="password" type="password" placeholder="Enter your Password">
-                                    <input type="submit" value="Submit">
-                                </form>
-                                <hr>
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Search -->
+                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <div class="input-group-append">
+                                <div class="input-group">
+                                    <input type="file" id="inputFile" onchange="selectFolder(event);" webkitdirectory mozdirectory msdirectory odirectory directory multiple="multiple" class="" name="Url-archivo" >
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
+                </nav>
+
+                
+                <div class="container-fluid d-flex row-vh-100" >
+                    <img src="img/carpeta-de-windows.jpeg" class="img-fluid" width="250px" alt="">
                 </div>
->>>>>>> d4d3e6393958855fd259f09a46781c95c389bb6c
+                <div class="row">
+                    <p class="m-3">
+                        
+                </div>
 
+            </div>
+            <!-- End of Main Content -->
+                <script>
+                    function getUrl(){
+                        var url = document.getElementById('inputFile').files[0].name;
+                        alert(url);
+                        }
 
+                </script>
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    
+                </div>
+            </footer>
+            <!-- End of Footer -->
 
+        </div>
+        <!-- End of Content Wrapper -->
 
+    </div>
+    <!-- End of Page Wrapper -->
 
+    <!-- Scroll to Top Button-->
 
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    // function unirContenidosFicheros($path){
-    //     $unioncontenidos= "";
-    //     echo "<h1>Leyendo ficheros de una carpeta:</h1>";
-    //     // Abrimos la carpeta que nos pasan como parámetro
-    //     $dir = opendir($path);
-    //     // Leo todos los ficheros de la carpeta
-    //     while ($elemento = readdir($dir)){
-    //      // Tratamos los elementos . y .. que tienen todas las carpetas
-    //         if( $elemento != "." && $elemento != ".."){
-    //       // Si es una carpeta
-    //         if( is_dir($path.$elemento) ){
-    //        // Muestro la carpeta
-    //         echo "<p><strong>CARPETA: ". $elemento ."</strong></p>";
-    //        // Si es un fichero
-    //         } else {
-    //        // Con este proceso leemos el fichero
-    //         $fp = fopen($path.$elemento, "rb");
-    //         $unioncontenidos .= fread($fp, filesize($path.$elemento));
-    //         fclose($fp);
-    //         echo "<br />". $elemento;
-    //         }
-    //         }
-    //     }
-        
-    //     // Mostramos el resultado final
-    //     echo "<h2>Resultado final</h2><pre><code>". $unioncontenidos ."</code></pre>";
-    //     }
-        
-    //     unirContenidosFicheros("Repositorio/");
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
 
+    <!-- Page level plugins -->
+    <script src="vendor/chart.js/Chart.min.js"></script>
 
- -->
+    <!-- Page level custom scripts -->
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
+
+</body>
+
+</html>
