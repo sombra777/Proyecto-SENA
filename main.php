@@ -1,3 +1,22 @@
+<?php
+    session_start();
+
+    require 'database.php';
+
+    if (isset($_SESSION['user_id'])) {
+        $records = $conn->prepare('SELECT id, email, password FROM users WHERE id = :id');
+        $records->bindParam(':id', $_SESSION['user_id']);
+        $records->execute();
+        $results = $records->fetch(PDO::FETCH_ASSOC);
+
+        $user = null;
+
+        if (count($results) > 0) {
+        $user = $results;
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,7 +42,13 @@
 </head>
 
 <body id="page-top">
-
+        <?php if(!empty($user)): ?>
+        <br> Welcome. <?= $user['email']; ?>
+        <br>You are Successfully Logged In
+        <a href="main.php">
+            Logout
+        </a>
+    <?php endif; ?>
     <!-- Page Wrapper -->
     <div id="wrapper">
 
