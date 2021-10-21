@@ -1,20 +1,87 @@
 <?php
+    include "vendor/autoload.php";
+// //Buscar la carpeta y su contenido
+// $path = 'C:\xampp\htdocs\Proyecto-SENA\Repositorio';
+// $total_archivos = analizar_directorio($path);
+
+// function analizar_directorio($path) {
+//     $total_archivos = 0;
+//     $files = array();
+//     $dir = opendir($path);
+//     while ($elemento = readdir($dir)){
+//         if( $elemento != "." && $elemento != ".."){
+//          // Si es una carpeta
+//             if( is_dir($path."/".$elemento) ){
+//              // Muestro la carpeta
+//                 echo("Procesando subdirectorio: ". $elemento . "<br>");
+//                 $total_archivos += analizar_directorio($path."/".$elemento);
+//          // Si es un fichero
+//             } else {
+//                 $total_archivos++;
+//                 $files[] = $elemento;
+//             }
+//         }
+//     }
+//     // echo '<h2>'.$path.'</h2>';
+//     // echo '<ul>';
+//     for($i=0; $i<count( $files ); $i++){
+//         echo '<li>'.$files[$i]."</li>";
+//     }
+//     // echo '</ul>';
+// }
+
+
+
     $formato = array('.pdf');
     if(isset($_POST['boton'])){
         //PARA CAPTURAR EL NOMBRE DEL ARCHIVO
+        
         $nombreArchivo = $_FILES['Url-archivo']['name'];
         $nombreTmpArchivo = $_FILES['Url-archivo']['tmp_name'];
         $ext = substr($nombreArchivo,strrpos($nombreArchivo, '.'));
         if(in_array($ext, $formato)){
-            //para subir un archivo a una carpeta
-            if(move_uploaded_file($nombreTmpArchivo, "archivo/$nombreArchivo")){
-                 echo "Archivo subido exitosamente";
-            }
 
-        }else{
-            echo"No señor, Archivo no permitido";
-        }
+        //     //Buscar el Documento pdf
+        //     echo$nombreArchivo ;
+
+
+        // $Url = $_POST[$nombreArchivo];
+        // $parser = new \Smalot\PdfParser\Parser();
+        // $nombreDocumento = $Url;
+        // $documento = $parser->parseFile($nombreDocumento);
+
+        //     if ($documento->getText()) {
+        //         $Contador = 0;
+        //     while ($Contador <br $Contador->strlen) {
+        //            //crear una carpeta
+            $micarpeta = 'Facturas';
+            if (!file_exists($micarpeta)) {
+            mkdir($micarpeta, 0777, true);
+            echo 'creada con exito';
+            //para subir un archivo a una carpeta
+            if(move_uploaded_file($nombreTmpArchivo, "$micarpeta/$nombreArchivo")){
+                
+                echo "<br>Archivo subido exitosamente </br>";
+            }
+            }else{
+                echo"No señor, Archivo no permitido";
+            }
     }
+}   
+        //     echo 'es texto';
+        // }
+            
+        // }else {
+        //     echo('es imagen'); 
+        // } 
+
+        // $texto = $documento->getText();
+
+        // $textojson = json_encode($texto);   // formato json
+
+        
+            
+    
     // session_start();
 
     // require 'database.php';

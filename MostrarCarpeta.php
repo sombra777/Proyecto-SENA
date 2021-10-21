@@ -1,7 +1,7 @@
 <?php
 //Buscar la carpeta y su contenido
-$Urlcarpeta = $_POST['Url-carpeta'];
-$path = $Urlcarpeta;
+// $Urlcarpeta = $_POST['Url-carpeta'];
+$path = 'C:\xampp\htdocs\Proyecto-SENA\Repositorio';
 $total_archivos = analizar_directorio($path);
 // echo "Hay $total_archivos archivos en el la carpeta : $path<br>";
 //------------------------------------------------------------- 
@@ -30,8 +30,6 @@ for($i=0; $i<count( $files ); $i++){
     echo '<li>'.$files[$i]."</li>";
 }
 // echo '</ul>';
-
-return $total_archivos;
 
 }
 

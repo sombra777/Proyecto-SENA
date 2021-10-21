@@ -50,13 +50,6 @@
     
 </form> -->
 
-<h2>Selecciona una imagen:</h2>
-	<form action="Procesar.php" enctype="multipart/form-data" method="POST">
-		<input type="file" name="imagen" required>
-		<br>
-		<br>
-		<button type="submit">Enviar</button>
-	</form>
 
     
 
@@ -67,7 +60,7 @@
 
 
 
-<<<<<<< HEAD
+
 
 
 
@@ -143,7 +136,7 @@
     //     echo '</ul>';
     // }
 
-=======
+
 <body class="bg-gradient-primary">
     <?php if(!empty($message)): ?>
         <p> <?= $message ?></p>
