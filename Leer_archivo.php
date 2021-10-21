@@ -37,7 +37,7 @@ include "vendor/autoload.php";
         //         echo "<br>Es otro tipo de documento </br>";
         //         break;
         // }
-
+//////HAY QUE HACER QUE ESTOOOO SIRVA BIEN (Toy que chillo mk)
         if (stristr($textojson,'Factura' || 'factura')) {
             echo " <br>Es una factura </br> ";
         }
