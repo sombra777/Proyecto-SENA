@@ -15,23 +15,40 @@ include "vendor/autoload.php";
 
         $texto = $documento->getText();
 
-        $texto = json_encode($texto);   // formato json
+        $textojson = json_encode($texto);   // formato json
 
-        if (stristr($texto, 'factura')) {
+
+        
+        // switch (true) {
+        //     case stristr($texto ,"Cuenta" || "letra") == TRUE:
+        //         echo "<br>Es una Letra de cambio</br>";
+        //         echo $texto;
+        //         break;
+        //     case stristr($texto ,'Factura' || 'factura'):
+        //         echo "<br>Es una factura</br>";
+        //         break;
+        //     case stristr($texto ,'cuenta de cobro' || 'Cuenta de cobro'):
+        //         echo "<br>Es una Cuenta de cobro</br>";
+        //         break;
+        //         case stristr($texto ,'cuenta de cobro' || 'Cuenta de cobro'):
+        //             echo "<br>Es una Cuenta de cobro</br>";
+        //             break;
+        //     default:
+        //         echo "<br>Es otro tipo de documento </br>";
+        //         break;
+        // }
+
+        if (stristr($textojson,'Factura' || 'factura')) {
             echo " <br>Es una factura </br> ";
-
-
-            
-        } elseif (stristr($texto, 'cuenta de cobro' || 'Cuenta de cobro')) {
+        }
+        if (stristr($textojson, 'cuenta de cobro' || 'Cuenta de cobro')) {
             echo " <br>Es una Cuenta de cobro </br> ";
-
-
-
-        } elseif (stristr($texto,'LETRA DE CAMBIO' || 'letra de cambio' || 'Letra de cambio' || 'Letradecambio')) {
+        }
+        if (stristr($textojson,'LETRA DE CAMBIO' || 'letra de cambio' || 'Letra de cambio' || 'Letradecambio')) {
             echo "<br>Es una Letra de cambio</br>";
         }
 
-        echo $texto;
+        
         
 
 

@@ -3,7 +3,7 @@
 $Urlcarpeta = $_POST['Url-carpeta'];
 $path = $Urlcarpeta;
 $total_archivos = analizar_directorio($path);
-echo "Hay $total_archivos archivos en el la carpeta : $path<br>";
+// echo "Hay $total_archivos archivos en el la carpeta : $path<br>";
 //------------------------------------------------------------- 
 function analizar_directorio($path) {
 $total_archivos = 0;
@@ -24,12 +24,12 @@ while ($elemento = readdir($dir)){
     }
     
 }
-echo '<h2>'.$path.'</h2>';
-echo '<ul>';
+// echo '<h2>'.$path.'</h2>';
+// echo '<ul>';
 for($i=0; $i<count( $files ); $i++){
     echo '<li>'.$files[$i]."</li>";
 }
-echo '</ul>';
+// echo '</ul>';
 
 return $total_archivos;
 

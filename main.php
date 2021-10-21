@@ -76,12 +76,11 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
                             <div class="input-group-append">
                                 <div class="input-group">
-                                    <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                                    <input type="file" id="inputFile" onchange="selectFolder(event);" webkitdirectory mozdirectory msdirectory odirectory directory multiple="multiple" class="" name="Url-archivo" >
                                 </div>
                             </div>
                         </div>
@@ -93,20 +92,23 @@
                     <img src="img/carpeta-de-windows.jpeg" class="img-fluid" width="250px" alt="">
                 </div>
                 <div class="row">
-                   <p class="m-3">
-                       Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis possimus architecto quaerat impedit saepe offic
-                   </p>
+                    <p class="m-3">
+                        
                 </div>
 
             </div>
             <!-- End of Main Content -->
+                <script>
+                    function getUrl(){
+                        var url = document.getElementById('inputFile').files[0].name;
+                        alert(url);
+                        }
 
+                </script>
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
-                    </div>
+                    
                 </div>
             </footer>
             <!-- End of Footer -->
