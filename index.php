@@ -1,26 +1,4 @@
 
-<?php
-    session_start();
-
-    require 'database.php';
-
-    if (!empy($_POST['email']) && !empy($_POST['password'])) {
-        $records = $conn->prepare('SELECT id, email, password FROM users WHERE id = :id');
-        $records->bindParam(':email', $_POST['email']);
-        $records->execute();
-        $results = $records->fetch(PDO::FETCH_ASSOC);
-
-        $message = '';
-
-        if (count($results) > 0 && password_verify($_POST['password'])) {
-        $_SESSION ['user_id'] = $results ['id'];
-        header('location:  /php-login');
-        }else{
-            $message('no se pudo ingresar');
-        }
-    }
-    
-?>
 
 
 <!DOCTYPE html>
