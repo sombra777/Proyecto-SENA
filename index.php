@@ -1,3 +1,7 @@
+<?php
+require 'database.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,7 +44,11 @@
                             <div class="p-5">
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Bienvenido</h1>
+
                                     <img src="img\login.png" class="m-4" width="250px" alt="">
+
+                                    <img src="img/login.png" class="m-4" width="250px" alt="">
+
                                 </div>
                                 <form action="main.php" class="user">
                                     <div class="form-group">
