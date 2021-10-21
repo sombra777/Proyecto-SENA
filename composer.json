@@ -1,0 +1,14 @@
+{
+    "name": "sena/ideasenasoft",
+    "description": "text",
+    "require": {
+        "smalot/pdfparser": "^1.1"
+    },
+    "license": "mit",
+    "authors": [
+        {
+            "name": "Walter",
+            "email": "walter.arias.aguirre@gmail.com"
+        }
+    ]
+}
