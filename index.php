@@ -1,5 +1,20 @@
 <?php
-require 'database.php';
+  session_start();
+
+  require 'database.php';
+
+  if (isset($_SESSION['user_id'])) {
+    $records = $conn->prepare('SELECT id, email, password FROM users WHERE id = :id');
+    $records->bindParam(':id', $_SESSION['user_id']);
+    $records->execute();
+    $results = $records->fetch(PDO::FETCH_ASSOC);
+
+    $user = null;
+
+    if (count($results) > 0) {
+      $user = $results;
+    }
+  }
 ?>
 
 <!DOCTYPE html>
@@ -46,23 +61,10 @@ require 'database.php';
                                     <h1 class="h4 text-gray-900 mb-4">Bienvenido</h1>
                                     <img src="img/login.png" class="m-4" width="250px" alt="">
                                 </div>
-                                <form action="main.php" class="user">
-                                    <div class="form-group">
-                                        <input type="email" class="form-control form-control-user"
-                                            id="exampleInputEmail" aria-describedby="emailHelp"
-                                            placeholder="Ingrese el correo electronico">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="contraseña">
-                                    </div>
-                                    <div class="row  justify-content-center">
-                                        <button  type="submit" style="width: 50%;"
-                                            class="btn btn-primary btn-md">Enviar
-                                            
-                                        </button>
-                                    </div>
-
+                                <form action="index.php" method="POST">
+                                    <input name="email" type="text" placeholder="Enter your email">
+                                    <input name="password" type="password" placeholder="Enter your Password">
+                                    <input type="submit" value="Submit">
                                 </form>
                                 <hr>
                             </div>
