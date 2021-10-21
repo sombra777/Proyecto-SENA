@@ -44,7 +44,7 @@
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
                 <a class="nav-link" href="index.html">
-                    <span><i class="fas fa-folder"></i>Carpetas</span></a>
+                    <span><i class="fas fa-folder"></i>Carpeta</span></a>
             </li>
 
             <!-- Divider -->
@@ -52,7 +52,7 @@
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                
             </div>
 
             <!-- Sidebar Message -->
